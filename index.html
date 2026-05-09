@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>عيادة سما للأسنان | حجز مواعيد احترافي</title>
+    <!-- Google Fonts + Font Awesome + AOS Animation -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0a2e3f 0%, #1a4a5f 50%, #0d3b4a 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* animated background particles */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bg-animation span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255,255,255,0.05);
+            bottom: -150px;
+            border-radius: 50%;
+            animation: floatUp 15s infinite linear;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.3; }
+            100% { transform: translateY(-1200px) rotate(720deg); opacity: 0; }
+        }
+
+        /* main container */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero + Form card */
+        .booking-card {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(2px);
+            border-radius: 48px;
+            overflow: hidden;
+            box-shadow: 0 40px 70px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .left-hero {
+            flex: 1.2;
+            background: linear-gradient(145deg, #003b4b, #00212b);
+            padding: 2.5rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-hero::before {
+            content: "🦷";
+            font-size: 15rem;
+            position: absolute;
+            bottom: -40px;
+            left: -40px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .clinic-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            animation: fadeSlideUp 0.7s ease;
+        }
+
+        .clinic-tagline {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .features li {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            transform: translateX(0);
+            transition: 0.2s;
+        }
+
+        .features li i {
+            font-size: 1.3rem;
+            width: 30px;
+            color: #64ffda;
+        }
+
+        .right-form {
+            flex: 1;
+            padding: 2.8rem 2.5rem;
+            background: white;
+        }
+
+        .right-form h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #003b4b;
+            margin-bottom: 0.4rem;
+        }
+
+        .right-form p {
+            color: #5f7f8c;
+            margin-bottom: 2rem;
+            border-right: 3px solid #64ffda;
+            padding-right: 12px;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0a2e3f;
+            font-size: 0.9rem;
+        }
+
+        .name-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .name-row .input-group {
+            flex: 1;
+        }
+
+        input, .phone-wrapper input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 1.5px solid #e0eef4;
+            border-radius: 60px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            transition: all 0.2s;
+            background: #fdfdfd;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2c9ab3;
+            box-shadow: 0 0 0 3px rgba(44,154,179,0.2);
+        }
+
+        /* Phone with country code */
+        .phone-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #fdfdfd;
+            border: 1.5px solid #e0eef4;
+            border-radius: 60px;
+            padding: 0 0.1rem 0 0.8rem;
+            transition: all 0.2s;
+        }
+        .phone-wrapper:focus-within {
+            border-color: #2c9ab3;
+            box-shadow: 0 0 0 3px rgba(44,154,179,0.2);
+        }
+        .country-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0f5f8;
+            padding: 0.4rem 0.8rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            position: relative;
+        }
+        .country-flag {
+            font-size: 1.3rem;
+        }
+        .country-code {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #003b4b;
+        }
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            color: #2c9ab3;
+        }
+        .country-dropdown {
+            position: absolute;
+            top: 55px;
+            left: 0;
+            background: white;
+            border-radius: 24px;
+            width: 280px;
+            max-height: 280px;
+            overflow-y: auto;
+            z-index: 200;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+            display: none;
+            border: 1px solid #cbdbe2;
+        }
+        .country-dropdown.active {
+            display: block;
+            animation: fadeSlideUp 0.2s;
+        }
+        .country-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: 0.1s;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .country-item:hover {
+            background: #e5f2f5;
+        }
+        .phone-number-input {
+            flex: 1;
+            border: none !important;
+            padding: 0.8rem 0;
+            background: transparent;
+        }
+        .phone-number-input:focus {
+            box-shadow: none !important;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(95deg, #003b4b, #00718b);
+            border: none;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            border-radius: 60px;
+            margin-top: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Cairo', sans-serif;
+        }
+        .submit-btn:hover {
+            background: linear-gradient(95deg, #005f74, #0095b5);
+            transform: scale(1.02);
+            box-shadow: 0 12px 25px rgba(0,59,75,0.3);
+        }
+
+        .loading {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: #0a2e3f;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 60px;
+            font-weight: 500;
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255,255,255,0.6);
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        @media (max-width: 860px) {
+            .booking-card { flex-direction: column; border-radius: 32px; margin: 1rem;}
+            .left-hero { text-align: center; }
+            .features li { justify-content: center; }
+        }
+
+        @media (max-width: 520px) {
+            .name-row { flex-direction: column; gap: 0; }
+            .right-form { padding: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-animation" id="bgAnimation"></div>
+
+<div class="container">
+    <div class="booking-card" data-aos="fade-up" data-aos-duration="1000">
+        <div class="left-hero">
+            <div class="clinic-name">عيادة سما للأسنان<br><span style="font-size: 1.2rem;">✨ Smile Dental Care</span></div>
+            <div class="clinic-tagline">ابتسامتك健康 .. مسؤوليتنا. أحدث التقنيات وأطباء متخصصون لنمنحك أفضل رعاية للأسنان.</div>
+            <ul class="features">
+                <li><i class="fas fa-calendar-check"></i> حجز مواعيد فوري</li>
+                <li><i class="fas fa-tooth"></i> استشارات مجانية</li>
+                <li><i class="fas fa-clock"></i> خدمة 24/7 للرد على استفساراتك</li>
+            </ul>
+        </div>
+        <div class="right-form">
+            <h2>احجز موعدك الآن</h2>
+            <p>املأ البيانات وسيقوم فريقنا بتأكيد الحجز خلال دقائق</p>
+
+            <div class="name-row">
+                <div class="input-group">
+                    <label>الاسم الأول</label>
+                    <input type="text" id="firstName" placeholder="أحمد" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>الاسم الثاني</label>
+                    <input type="text" id="lastName" placeholder="محمد" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>رقم الهاتف</label>
+                <div class="phone-wrapper">
+                    <div class="country-selector" id="countrySelector">
+                        <span class="country-flag" id="selectedFlag">🇩🇿</span>
+                        <span class="country-code" id="selectedCode">+213</span>
+                        <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                        <div class="country-dropdown" id="countryDropdown">
+                            <!-- filled by js -->
+                        </div>
+                    </div>
+                    <input type="tel" id="phoneNumber" class="phone-number-input" placeholder="551234567" autocomplete="off">
+                </div>
+            </div>
+
+            <button class="submit-btn" id="searchAppointmentBtn">
+                <span class="btn-text"><i class="fas fa-search"></i> بحث عن موعد</span>
+                <span class="loading"><i class="fas fa-spinner fa-pulse"></i> جاري الإرسال</span>
+            </button>
+        </div>
+    </div>
+</div>
+<footer>© 2026 عيادة سما للأسنان - حجز مواعيد احترافي</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    // ---------- قائمة الدول (أعلام + مفاتيح) ----------
+    const countries = [
+        { name: "الجزائر", flag: "🇩🇿", code: "+213" },
+        { name: "السعودية", flag: "🇸🇦", code: "+966" },
+        { name: "مصر", flag: "🇪🇬", code: "+20" },
+        { name: "الإمارات", flag: "🇦🇪", code: "+971" },
+        { name: "قطر", flag: "🇶🇦", code: "+974" },
+        { name: "الكويت", flag: "🇰🇼", code: "+965" },
+        { name: "البحرين", flag: "🇧🇭", code: "+973" },
+        { name: "عُمان", flag: "🇴🇲", code: "+968" },
+        { name: "العراق", flag: "🇮🇶", code: "+964" },
+        { name: "الأردن", flag: "🇯🇴", code: "+962" },
+        { name: "لبنان", flag: "🇱🇧", code: "+961" },
+        { name: "فلسطين", flag: "🇵🇸", code: "+970" },
+        { name: "سوريا", flag: "🇸🇾", code: "+963" },
+        { name: "اليمن", flag: "🇾🇪", code: "+967" },
+        { name: "ليبيا", flag: "🇱🇾", code: "+218" },
+        { name: "تونس", flag: "🇹🇳", code: "+216" },
+        { name: "المغرب", flag: "🇲🇦", code: "+212" },
+        { name: "موريتانيا", flag: "🇲🇷", code: "+222" },
+        { name: "السودان", flag: "🇸🇩", code: "+249" },
+        { name: "الصومال", flag: "🇸🇴", code: "+252" },
+        { name: "جيبوتي", flag: "🇩🇯", code: "+253" },
+        { name: "جزر القمر", flag: "🇰🇲", code: "+269" },
+        { name: "تركيا", flag: "🇹🇷", code: "+90" },
+        { name: "الولايات المتحدة", flag: "🇺🇸", code: "+1" },
+        { name: "كندا", flag: "🇨🇦", code: "+1" },
+        { name: "بريطانيا", flag: "🇬🇧", code: "+44" },
+        { name: "فرنسا", flag: "🇫🇷", code: "+33" },
+        { name: "ألمانيا", flag: "🇩🇪", code: "+49" },
+        { name: "إيطاليا", flag: "🇮🇹", code: "+39" }
+    ];
+
+    let selectedCountry = { flag: "🇩🇿", code: "+213", name: "الجزائر" };
+
+    function buildDropdown() {
+        const container = document.getElementById('countryDropdown');
+        container.innerHTML = '';
+        countries.forEach(ct => {
+            const div = document.createElement('div');
+            div.className = 'country-item';
+            div.innerHTML = `<span style="font-size:1.2rem;">${ct.flag}</span> <span>${ct.name}</span> <span style="margin-right:auto; color:#00718b;">${ct.code}</span>`;
+            div.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectedCountry = { flag: ct.flag, code: ct.code, name: ct.name };
+                document.getElementById('selectedFlag').innerText = selectedCountry.flag;
+                document.getElementById('selectedCode').innerText = selectedCountry.code;
+                document.getElementById('countryDropdown').classList.remove('active');
+            });
+            container.appendChild(div);
+        });
+    }
+
+    // toggle dropdown
+    const selectorDiv = document.getElementById('countrySelector');
+    const dropdown = document.getElementById('countryDropdown');
+    selectorDiv.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', () => {
+        dropdown.classList.remove('active');
+    });
+
+    buildDropdown();
+
+    // AOS
+    AOS.init({ once: true, duration: 800 });
+
+    // button + webhook
+    const submitBtn = document.getElementById('searchAppointmentBtn');
+    const btnTextSpan = document.querySelector('.btn-text');
+    const loadingSpan = document.querySelector('.loading');
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const phoneNumberInput = document.getElementById('phoneNumber');
+
+    function validateForm() {
+        const firstName = firstNameInput.value.trim();
+        const lastName = lastNameInput.value.trim();
+        const phoneRaw = phoneNumberInput.value.trim();
+        if (!firstName) { showToast("⚠️ الرجاء إدخال الاسم الأول"); return false; }
+        if (!lastName) { showToast("⚠️ الرجاء إدخال الاسم الثاني"); return false; }
+        if (!phoneRaw) { showToast("⚠️ الرجاء إدخال رقم الهاتف"); return false; }
+        // basic number validation
+        const phoneDigits = phoneRaw.replace(/\D/g, '');
+        if (phoneDigits.length < 6) { showToast("⚠️ رقم الهاتف غير مكتمل"); return false; }
+        return true;
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toastMsgGlobal');
+        if (toast) {
+            toast.querySelector('span').innerText = msg;
+            toast.style.display = "flex";
+            setTimeout(() => { toast.style.display = "none"; }, 3500);
+        } else {
+            alert(msg);
+        }
+    }
+
+    async function sendToWebhook(payload) {
+        const webhookUrl = "https://choooo.app.n8n.cloud/webhook-test/4fe15a31-6365-4b96-a3d5-3b02bbe3d31a";
+        try {
+            const response = await fetch(webhookUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+            if (response.ok) {
+                showToast("✅ تم استلام طلبك! سنقوم بالرد عليك قريبًا لحجز الموعد.");
+                firstNameInput.value = '';
+                lastNameInput.value = '';
+                phoneNumberInput.value = '';
+            } else {
+                const errorText = await response.text();
+                console.error(errorText);
+                showToast("❌ حدث خطأ، حاول مجددًا.");
+            }
+        } catch (err) {
+            console.error(err);
+            showToast("❌ فشل الاتصال بالخادم، تحقق من اتصالك.");
+        }
+    }
+
+    submitBtn.addEventListener('click', async () => {
+        if (!validateForm()) return;
+        const firstName = firstNameInput.value.trim();
+        const lastName = lastNameInput.value.trim();
+        const phoneNumber = phoneNumberInput.value.trim();
+        const fullPhone = selectedCountry.code + phoneNumber;
+
+        const bookingData = {
+            first_name: firstName,
+            last_name: lastName,
+            phone_raw: phoneNumber,
+            country_code: selectedCountry.code,
+            full_phone: fullPhone,
+            country_name: selectedCountry.name,
+            source: "SmileDental_website",
+            timestamp: new Date().toISOString()
+        };
+
+        // show loading
+        btnTextSpan.style.display = "none";
+        loadingSpan.style.display = "flex";
+        submitBtn.disabled = true;
+
+        await sendToWebhook(bookingData);
+
+        btnTextSpan.style.display = "flex";
+        loadingSpan.style.display = "none";
+        submitBtn.disabled = false;
+    });
+
+    // create toast element if not exists
+    if (!document.getElementById('toastMsgGlobal')) {
+        const toastDiv = document.createElement('div');
+        toastDiv.id = 'toastMsgGlobal';
+        toastDiv.className = 'toast-msg';
+        toastDiv.innerHTML = '<i class="fas fa-info-circle"></i> <span>رسالة</span>';
+        document.body.appendChild(toastDiv);
+    }
+
+    // generate floating animation bubbles
+    const bgDiv = document.getElementById('bgAnimation');
+    for (let i = 0; i < 45; i++) {
+        const bubble = document.createElement('span');
+        const size = Math.random() * 35 + 8;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${Math.random() * 100}%`;
+        bubble.style.animationDelay = `${Math.random() * 15}s`;
+        bubble.style.animationDuration = `${Math.random() * 10 + 8}s`;
+        bgDiv.appendChild(bubble);
+    }
+</script>
+</body>
+</html>
