@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>عيادة سما للأسنان | حجز مواعيد احترافي</title>
-    <!-- Google Fonts + Font Awesome + AOS Animation -->
+    <title>سمائل | عيادة سما للأسنان - حجز مواعيد فاخر</title>
+    <!-- Google Fonts + Font Awesome + AOS + Swiper -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         * {
             margin: 0;
@@ -17,70 +18,88 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #0a2e3f 0%, #1a4a5f 50%, #0d3b4a 100%);
+            background: #0a0f1c;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* animated background particles */
-        .bg-animation {
+        /* 3D Animated Background */
+        canvas {
             position: fixed;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
-            overflow: hidden;
+            width: 100%;
+            height: 100%;
             z-index: 0;
-        }
-
-        .bg-animation span {
-            position: absolute;
             display: block;
-            width: 20px;
-            height: 20px;
-            background: rgba(255,255,255,0.05);
-            bottom: -150px;
-            border-radius: 50%;
-            animation: floatUp 15s infinite linear;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.5; }
-            80% { opacity: 0.3; }
-            100% { transform: translateY(-1200px) rotate(720deg); opacity: 0; }
+        .glass-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 1200px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 80px;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, #A5F0FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            margin-right: 2rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: #64ffda; }
 
-        /* main container */
         .container {
             position: relative;
-            z-index: 2;
-            max-width: 1300px;
+            z-index: 10;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1rem;
+            padding: 7rem 1.5rem 4rem;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Hero + Form card */
+        /* Hero + Form Ultra Premium */
         .booking-card {
-            background: rgba(255,255,255,0.96);
-            backdrop-filter: blur(2px);
-            border-radius: 48px;
+            background: rgba(20, 28, 40, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 64px;
             overflow: hidden;
-            box-shadow: 0 40px 70px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
             display: flex;
             flex-wrap: wrap;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(100,255,218,0.3);
         }
 
         .left-hero {
             flex: 1.2;
-            background: linear-gradient(145deg, #003b4b, #00212b);
-            padding: 2.5rem;
+            background: linear-gradient(145deg, #0B1320, #050a12);
+            padding: 3rem;
             color: white;
             display: flex;
             flex-direction: column;
@@ -88,350 +107,266 @@
             position: relative;
             overflow: hidden;
         }
-
-        .left-hero::before {
-            content: "🦷";
-            font-size: 15rem;
+        .left-hero::after {
+            content: '';
             position: absolute;
-            bottom: -40px;
-            left: -40px;
-            opacity: 0.1;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 40%, rgba(100,255,218,0.05) 0%, transparent 70%);
         }
-
         .clinic-name {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 800;
+            background: linear-gradient(135deg, #FFF, #64ffda);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 1rem;
-            letter-spacing: -1px;
-            animation: fadeSlideUp 0.7s ease;
         }
-
-        .clinic-tagline {
-            font-size: 1rem;
-            opacity: 0.85;
-            margin-bottom: 2rem;
-            line-height: 1.6;
+        .rating {
+            display: flex;
+            gap: 5px;
+            margin: 1rem 0;
+            color: #ffd966;
         }
-
         .features {
             list-style: none;
             margin-top: 2rem;
         }
-
         .features li {
             margin: 1rem 0;
             display: flex;
             align-items: center;
             gap: 12px;
             font-weight: 500;
-            transform: translateX(0);
-            transition: 0.2s;
-        }
-
-        .features li i {
-            font-size: 1.3rem;
-            width: 30px;
-            color: #64ffda;
+            backdrop-filter: blur(4px);
         }
 
         .right-form {
             flex: 1;
-            padding: 2.8rem 2.5rem;
-            background: white;
+            padding: 3rem;
+            background: rgba(255,255,255,0.05);
         }
-
         .right-form h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: #003b4b;
-            margin-bottom: 0.4rem;
+            background: linear-gradient(135deg, #ffffff, #a0f0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-
-        .right-form p {
-            color: #5f7f8c;
-            margin-bottom: 2rem;
-            border-right: 3px solid #64ffda;
-            padding-right: 12px;
-        }
-
         .input-group {
             margin-bottom: 1.5rem;
         }
-
         .input-group label {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #0a2e3f;
-            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+            color: #ccddee;
         }
-
-        .name-row {
+        input, select, .phone-wrapper {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 40px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            color: white;
+            transition: all 0.2s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #64ffda;
+            box-shadow: 0 0 12px rgba(100,255,218,0.3);
+        }
+        .datetime-row {
             display: flex;
             gap: 1rem;
         }
-
-        .name-row .input-group {
+        .datetime-row .input-group {
             flex: 1;
         }
-
-        input, .phone-wrapper input {
-            width: 100%;
-            padding: 0.9rem 1.2rem;
-            border: 1.5px solid #e0eef4;
-            border-radius: 60px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            transition: all 0.2s;
-            background: #fdfdfd;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #2c9ab3;
-            box-shadow: 0 0 0 3px rgba(44,154,179,0.2);
-        }
-
-        /* Phone with country code */
         .phone-wrapper {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: #fdfdfd;
-            border: 1.5px solid #e0eef4;
-            border-radius: 60px;
             padding: 0 0.1rem 0 0.8rem;
-            transition: all 0.2s;
-        }
-        .phone-wrapper:focus-within {
-            border-color: #2c9ab3;
-            box-shadow: 0 0 0 3px rgba(44,154,179,0.2);
         }
         .country-selector {
             display: flex;
             align-items: center;
             gap: 6px;
-            background: #f0f5f8;
+            background: rgba(0,0,0,0.4);
             padding: 0.4rem 0.8rem;
             border-radius: 60px;
             cursor: pointer;
-            transition: 0.2s;
             position: relative;
-        }
-        .country-flag {
-            font-size: 1.3rem;
-        }
-        .country-code {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #003b4b;
-        }
-        .dropdown-arrow {
-            font-size: 0.7rem;
-            color: #2c9ab3;
         }
         .country-dropdown {
             position: absolute;
             top: 55px;
             left: 0;
-            background: white;
+            background: #1e2a3a;
             border-radius: 24px;
-            width: 280px;
-            max-height: 280px;
+            width: 260px;
+            max-height: 260px;
             overflow-y: auto;
             z-index: 200;
-            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
             display: none;
-            border: 1px solid #cbdbe2;
-        }
-        .country-dropdown.active {
-            display: block;
-            animation: fadeSlideUp 0.2s;
-        }
-        .country-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 15px;
-            cursor: pointer;
-            transition: 0.1s;
-            border-bottom: 1px solid #edf2f7;
-        }
-        .country-item:hover {
-            background: #e5f2f5;
         }
         .phone-number-input {
             flex: 1;
             border: none !important;
-            padding: 0.8rem 0;
             background: transparent;
+            color: white;
         }
-        .phone-number-input:focus {
-            box-shadow: none !important;
-        }
-
         .submit-btn {
             width: 100%;
-            background: linear-gradient(95deg, #003b4b, #00718b);
+            background: linear-gradient(95deg, #64ffda, #00b4d8);
             border: none;
-            padding: 1rem;
+            padding: 1.2rem;
             font-size: 1.2rem;
-            font-weight: 700;
-            color: white;
+            font-weight: 800;
+            color: #0a0f1c;
             border-radius: 60px;
-            margin-top: 1.2rem;
+            margin-top: 1.5rem;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            font-family: 'Cairo', sans-serif;
-        }
-        .submit-btn:hover {
-            background: linear-gradient(95deg, #005f74, #0095b5);
-            transform: scale(1.02);
-            box-shadow: 0 12px 25px rgba(0,59,75,0.3);
-        }
-
-        .loading {
-            display: none;
-            align-items: center;
-            justify-content: center;
             gap: 12px;
         }
-
         .toast-msg {
             position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: #0a2e3f;
-            color: white;
-            padding: 12px 22px;
+            bottom: 30px;
+            left: 30px;
+            background: #1e2a3a;
+            backdrop-filter: blur(12px);
+            color: #64ffda;
+            padding: 12px 24px;
             border-radius: 60px;
-            font-weight: 500;
             z-index: 2000;
             display: none;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            gap: 12px;
+            border-left: 4px solid #64ffda;
         }
-
         footer {
             text-align: center;
             padding: 2rem;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.4);
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
-
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(20px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-
         @media (max-width: 860px) {
-            .booking-card { flex-direction: column; border-radius: 32px; margin: 1rem;}
-            .left-hero { text-align: center; }
-            .features li { justify-content: center; }
-        }
-
-        @media (max-width: 520px) {
-            .name-row { flex-direction: column; gap: 0; }
-            .right-form { padding: 1.8rem; }
+            .booking-card { flex-direction: column; margin: 1rem; }
+            .glass-nav { width: 90%; padding: 0.5rem 1rem; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="bg-animation" id="bgAnimation"></div>
+<canvas id="bgCanvas"></canvas>
+
+<div class="glass-nav">
+    <div class="logo">SMA DENTAL</div>
+    <div class="nav-links">
+        <a href="#">الرئيسية</a>
+        <a href="#">خدماتنا</a>
+        <a href="#">اتصل بنا</a>
+    </div>
+</div>
 
 <div class="container">
     <div class="booking-card" data-aos="fade-up" data-aos-duration="1000">
         <div class="left-hero">
-            <div class="clinic-name">عيادة سما للأسنان<br><span style="font-size: 1.2rem;">✨ Smile Dental Care</span></div>
-            <div class="clinic-tagline">ابتسامتك健康 .. مسؤوليتنا. أحدث التقنيات وأطباء متخصصون لنمنحك أفضل رعاية للأسنان.</div>
+            <div class="clinic-name">عيادة سما<br>للأسنان</div>
+            <div class="rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                <span style="margin-right: 10px;">4.9 (1,200+ تقييم)</span>
+            </div>
             <ul class="features">
-                <li><i class="fas fa-calendar-check"></i> حجز مواعيد فوري</li>
-                <li><i class="fas fa-tooth"></i> استشارات مجانية</li>
-                <li><i class="fas fa-clock"></i> خدمة 24/7 للرد على استفساراتك</li>
+                <li><i class="fas fa-microphone-alt"></i> حجز ذكي بالذكاء الاصطناعي</li>
+                <li><i class="fas fa-clock"></i> تأكيد فوري 24/7</li>
+                <li><i class="fas fa-shield-alt"></i> أحدث معايير التعقيم</li>
             </ul>
         </div>
         <div class="right-form">
             <h2>احجز موعدك الآن</h2>
-            <p>املأ البيانات وسيقوم فريقنا بتأكيد الحجز خلال دقائق</p>
+            <p style="color:#a0c0e0;">املأ بياناتك واختر التوقيت المناسب</p>
 
-            <div class="name-row">
-                <div class="input-group">
-                    <label>الاسم الأول</label>
-                    <input type="text" id="firstName" placeholder="أحمد" autocomplete="off">
+            <div class="name-row" style="display: flex; gap: 1rem;">
+                <div class="input-group" style="flex:1">
+                    <label><i class="fas fa-user"></i> الاسم الأول</label>
+                    <input type="text" id="firstName" placeholder="أحمد">
                 </div>
-                <div class="input-group">
-                    <label>الاسم الثاني</label>
-                    <input type="text" id="lastName" placeholder="محمد" autocomplete="off">
+                <div class="input-group" style="flex:1">
+                    <label><i class="fas fa-user-friends"></i> اسم العائلة</label>
+                    <input type="text" id="lastName" placeholder="محمد">
                 </div>
             </div>
 
             <div class="input-group">
-                <label>رقم الهاتف</label>
+                <label><i class="fas fa-phone-alt"></i> رقم الهاتف</label>
                 <div class="phone-wrapper">
                     <div class="country-selector" id="countrySelector">
-                        <span class="country-flag" id="selectedFlag">🇩🇿</span>
-                        <span class="country-code" id="selectedCode">+213</span>
-                        <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
-                        <div class="country-dropdown" id="countryDropdown">
-                            <!-- filled by js -->
-                        </div>
+                        <span id="selectedFlag">🇩🇿</span>
+                        <span id="selectedCode">+213</span>
+                        <span><i class="fas fa-chevron-down"></i></span>
+                        <div class="country-dropdown" id="countryDropdown"></div>
                     </div>
-                    <input type="tel" id="phoneNumber" class="phone-number-input" placeholder="551234567" autocomplete="off">
+                    <input type="tel" id="phoneNumber" class="phone-number-input" placeholder="551234567">
+                </div>
+            </div>
+
+            <!-- حقل اختيار التاريخ والوقت المفضل -->
+            <div class="datetime-row">
+                <div class="input-group">
+                    <label><i class="fas fa-calendar-alt"></i> التاريخ المفضل</label>
+                    <input type="date" id="preferredDate" min="2026-05-11">
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-clock"></i> الوقت المفضل</label>
+                    <select id="preferredTime">
+                        <option value="">اختر الوقت</option>
+                        <option value="09:00">09:00 صباحاً</option>
+                        <option value="10:00">10:00 صباحاً</option>
+                        <option value="11:00">11:00 صباحاً</option>
+                        <option value="12:00">12:00 ظهراً</option>
+                        <option value="14:00">02:00 مساءً</option>
+                        <option value="15:00">03:00 مساءً</option>
+                        <option value="16:00">04:00 مساءً</option>
+                        <option value="17:00">05:00 مساءً</option>
+                    </select>
                 </div>
             </div>
 
             <button class="submit-btn" id="searchAppointmentBtn">
-                <span class="btn-text"><i class="fas fa-search"></i> بحث عن موعد</span>
-                <span class="loading"><i class="fas fa-spinner fa-pulse"></i> جاري الإرسال</span>
+                <span class="btn-text"><i class="fas fa-sparkles"></i> بحث عن موعد</span>
+                <span class="loading" style="display:none;"><i class="fas fa-spinner fa-pulse"></i> جاري الإرسال</span>
             </button>
         </div>
     </div>
 </div>
-<footer>© 2026 عيادة سما للأسنان - حجز مواعيد احترافي</footer>
+<footer>© 2026 سما للرعاية الذكية - حجز فاخر بالذكاء الاصطناعي</footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // ---------- قائمة الدول (أعلام + مفاتيح) ----------
+    // ---------- الدول ----------
     const countries = [
-        { name: "الجزائر", flag: "🇩🇿", code: "+213" },
-        { name: "السعودية", flag: "🇸🇦", code: "+966" },
-        { name: "مصر", flag: "🇪🇬", code: "+20" },
-        { name: "الإمارات", flag: "🇦🇪", code: "+971" },
-        { name: "قطر", flag: "🇶🇦", code: "+974" },
-        { name: "الكويت", flag: "🇰🇼", code: "+965" },
-        { name: "البحرين", flag: "🇧🇭", code: "+973" },
-        { name: "عُمان", flag: "🇴🇲", code: "+968" },
-        { name: "العراق", flag: "🇮🇶", code: "+964" },
-        { name: "الأردن", flag: "🇯🇴", code: "+962" },
-        { name: "لبنان", flag: "🇱🇧", code: "+961" },
-        { name: "فلسطين", flag: "🇵🇸", code: "+970" },
-        { name: "سوريا", flag: "🇸🇾", code: "+963" },
-        { name: "اليمن", flag: "🇾🇪", code: "+967" },
-        { name: "ليبيا", flag: "🇱🇾", code: "+218" },
-        { name: "تونس", flag: "🇹🇳", code: "+216" },
-        { name: "المغرب", flag: "🇲🇦", code: "+212" },
-        { name: "موريتانيا", flag: "🇲🇷", code: "+222" },
-        { name: "السودان", flag: "🇸🇩", code: "+249" },
-        { name: "الصومال", flag: "🇸🇴", code: "+252" },
-        { name: "جيبوتي", flag: "🇩🇯", code: "+253" },
-        { name: "جزر القمر", flag: "🇰🇲", code: "+269" },
-        { name: "تركيا", flag: "🇹🇷", code: "+90" },
-        { name: "الولايات المتحدة", flag: "🇺🇸", code: "+1" },
-        { name: "كندا", flag: "🇨🇦", code: "+1" },
-        { name: "بريطانيا", flag: "🇬🇧", code: "+44" },
-        { name: "فرنسا", flag: "🇫🇷", code: "+33" },
-        { name: "ألمانيا", flag: "🇩🇪", code: "+49" },
-        { name: "إيطاليا", flag: "🇮🇹", code: "+39" }
+        { name: "الجزائر", flag: "🇩🇿", code: "+213" }, { name: "السعودية", flag: "🇸🇦", code: "+966" },
+        { name: "مصر", flag: "🇪🇬", code: "+20" }, { name: "الإمارات", flag: "🇦🇪", code: "+971" },
+        { name: "قطر", flag: "🇶🇦", code: "+974" }, { name: "الكويت", flag: "🇰🇼", code: "+965" },
+        { name: "الولايات المتحدة", flag: "🇺🇸", code: "+1" }, { name: "بريطانيا", flag: "🇬🇧", code: "+44" },
+        { name: "فرنسا", flag: "🇫🇷", code: "+33" }, { name: "ألمانيا", flag: "🇩🇪", code: "+49" }
     ];
-
     let selectedCountry = { flag: "🇩🇿", code: "+213", name: "الجزائر" };
 
     function buildDropdown() {
@@ -440,141 +375,165 @@
         countries.forEach(ct => {
             const div = document.createElement('div');
             div.className = 'country-item';
-            div.innerHTML = `<span style="font-size:1.2rem;">${ct.flag}</span> <span>${ct.name}</span> <span style="margin-right:auto; color:#00718b;">${ct.code}</span>`;
+            div.style.padding = '10px 15px';
+            div.style.cursor = 'pointer';
+            div.style.borderBottom = '1px solid #2a3a4a';
+            div.innerHTML = `<span style="font-size:1.2rem;">${ct.flag}</span> <span style="margin:0 10px;">${ct.name}</span> <span style="color:#64ffda;">${ct.code}</span>`;
             div.addEventListener('click', (e) => {
                 e.stopPropagation();
-                selectedCountry = { flag: ct.flag, code: ct.code, name: ct.name };
+                selectedCountry = ct;
                 document.getElementById('selectedFlag').innerText = selectedCountry.flag;
                 document.getElementById('selectedCode').innerText = selectedCountry.code;
-                document.getElementById('countryDropdown').classList.remove('active');
+                document.getElementById('countryDropdown').style.display = 'none';
             });
             container.appendChild(div);
         });
     }
-
-    // toggle dropdown
-    const selectorDiv = document.getElementById('countrySelector');
-    const dropdown = document.getElementById('countryDropdown');
-    selectorDiv.addEventListener('click', (e) => {
+    const sel = document.getElementById('countrySelector');
+    const dropdownDiv = document.getElementById('countryDropdown');
+    sel.addEventListener('click', (e) => {
         e.stopPropagation();
-        dropdown.classList.toggle('active');
+        dropdownDiv.style.display = dropdownDiv.style.display === 'block' ? 'none' : 'block';
     });
-    document.addEventListener('click', () => {
-        dropdown.classList.remove('active');
-    });
-
+    document.addEventListener('click', () => dropdownDiv.style.display = 'none');
     buildDropdown();
 
-    // AOS
     AOS.init({ once: true, duration: 800 });
 
-    // button + webhook
+    // ------ Webhook + Validation + إرسال مع الوقت ------
     const submitBtn = document.getElementById('searchAppointmentBtn');
-    const btnTextSpan = document.querySelector('.btn-text');
+    const btnSpan = document.querySelector('.btn-text');
     const loadingSpan = document.querySelector('.loading');
-    const firstNameInput = document.getElementById('firstName');
-    const lastNameInput = document.getElementById('lastName');
-    const phoneNumberInput = document.getElementById('phoneNumber');
+    const firstNameInp = document.getElementById('firstName');
+    const lastNameInp = document.getElementById('lastName');
+    const phoneInp = document.getElementById('phoneNumber');
+    const dateInp = document.getElementById('preferredDate');
+    const timeInp = document.getElementById('preferredTime');
+
+    function showToast(msg, isError = false) {
+        let toast = document.getElementById('toastMsgGlobal');
+        if (!toast) {
+            const div = document.createElement('div');
+            div.id = 'toastMsgGlobal';
+            div.className = 'toast-msg';
+            document.body.appendChild(div);
+            toast = div;
+        }
+        toast.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> <span>${msg}</span>`;
+        toast.style.display = 'flex';
+        setTimeout(() => { toast.style.display = 'none'; }, 3500);
+    }
 
     function validateForm() {
-        const firstName = firstNameInput.value.trim();
-        const lastName = lastNameInput.value.trim();
-        const phoneRaw = phoneNumberInput.value.trim();
-        if (!firstName) { showToast("⚠️ الرجاء إدخال الاسم الأول"); return false; }
-        if (!lastName) { showToast("⚠️ الرجاء إدخال الاسم الثاني"); return false; }
-        if (!phoneRaw) { showToast("⚠️ الرجاء إدخال رقم الهاتف"); return false; }
-        // basic number validation
-        const phoneDigits = phoneRaw.replace(/\D/g, '');
-        if (phoneDigits.length < 6) { showToast("⚠️ رقم الهاتف غير مكتمل"); return false; }
+        if (!firstNameInp.value.trim()) { showToast("⚠️ الرجاء إدخال الاسم الأول", true); return false; }
+        if (!lastNameInp.value.trim()) { showToast("⚠️ الرجاء إدخال اسم العائلة", true); return false; }
+        if (!phoneInp.value.trim()) { showToast("⚠️ الرجاء إدخال رقم الهاتف", true); return false; }
+        if (!dateInp.value) { showToast("⚠️ الرجاء اختيار التاريخ المفضل", true); return false; }
+        if (!timeInp.value) { showToast("⚠️ الرجاء اختيار الوقت المفضل", true); return false; }
         return true;
     }
 
-    function showToast(msg) {
-        const toast = document.getElementById('toastMsgGlobal');
-        if (toast) {
-            toast.querySelector('span').innerText = msg;
-            toast.style.display = "flex";
-            setTimeout(() => { toast.style.display = "none"; }, 3500);
-        } else {
-            alert(msg);
-        }
-    }
-
     async function sendToWebhook(payload) {
-        const webhookUrl = "https://choooo.app.n8n.cloud/webhook-test/4fe15a31-6365-4b96-a3d5-3b02bbe3d31a";
+        const url = "https://choooo.app.n8n.cloud/webhook-test/4fe15a31-6365-4b96-a3d5-3b02bbe3d31a";
         try {
-            const response = await fetch(webhookUrl, {
+            const response = await fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             });
             if (response.ok) {
-                showToast("✅ تم استلام طلبك! سنقوم بالرد عليك قريبًا لحجز الموعد.");
-                firstNameInput.value = '';
-                lastNameInput.value = '';
-                phoneNumberInput.value = '';
+                showToast("✅ تم استلام طلبك! سنتصل بك لتأكيد الموعد قريباً.");
+                firstNameInp.value = ''; lastNameInp.value = ''; phoneInp.value = '';
+                dateInp.value = ''; timeInp.value = '';
             } else {
-                const errorText = await response.text();
-                console.error(errorText);
-                showToast("❌ حدث خطأ، حاول مجددًا.");
+                showToast("❌ حدث خطأ، حاول مجدداً", true);
             }
         } catch (err) {
-            console.error(err);
-            showToast("❌ فشل الاتصال بالخادم، تحقق من اتصالك.");
+            showToast("❌ فشل الاتصال بالخادم", true);
         }
     }
 
     submitBtn.addEventListener('click', async () => {
         if (!validateForm()) return;
-        const firstName = firstNameInput.value.trim();
-        const lastName = lastNameInput.value.trim();
-        const phoneNumber = phoneNumberInput.value.trim();
-        const fullPhone = selectedCountry.code + phoneNumber;
+        const firstName = firstNameInp.value.trim();
+        const lastName = lastNameInp.value.trim();
+        const phoneRaw = phoneInp.value.trim();
+        const fullPhone = selectedCountry.code + phoneRaw;
+        const preferredDateTime = `${dateInp.value}T${timeInp.value}:00`;
 
-        const bookingData = {
+        const payload = {
             first_name: firstName,
             last_name: lastName,
-            phone_raw: phoneNumber,
-            country_code: selectedCountry.code,
             full_phone: fullPhone,
-            country_name: selectedCountry.name,
-            source: "SmileDental_website",
+            country_code: selectedCountry.code,
+            preferred_datetime: preferredDateTime,
+            preferred_date: dateInp.value,
+            preferred_time: timeInp.value,
+            source: "SmileDental_Ultra",
             timestamp: new Date().toISOString()
         };
 
-        // show loading
-        btnTextSpan.style.display = "none";
-        loadingSpan.style.display = "flex";
+        btnSpan.style.display = 'none';
+        loadingSpan.style.display = 'flex';
         submitBtn.disabled = true;
 
-        await sendToWebhook(bookingData);
+        await sendToWebhook(payload);
 
-        btnTextSpan.style.display = "flex";
-        loadingSpan.style.display = "none";
+        btnSpan.style.display = 'flex';
+        loadingSpan.style.display = 'none';
         submitBtn.disabled = false;
     });
 
-    // create toast element if not exists
-    if (!document.getElementById('toastMsgGlobal')) {
-        const toastDiv = document.createElement('div');
-        toastDiv.id = 'toastMsgGlobal';
-        toastDiv.className = 'toast-msg';
-        toastDiv.innerHTML = '<i class="fas fa-info-circle"></i> <span>رسالة</span>';
-        document.body.appendChild(toastDiv);
+    // ------ 3D Background animation with particles ------
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
     }
-
-    // generate floating animation bubbles
-    const bgDiv = document.getElementById('bgAnimation');
-    for (let i = 0; i < 45; i++) {
-        const bubble = document.createElement('span');
-        const size = Math.random() * 35 + 8;
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
-        bubble.style.left = `${Math.random() * 100}%`;
-        bubble.style.animationDelay = `${Math.random() * 15}s`;
-        bubble.style.animationDuration = `${Math.random() * 10 + 8}s`;
-        bgDiv.appendChild(bubble);
+    function initParticles() {
+        particles = [];
+        for (let i = 0; i < 90; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 3 + 1,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: (Math.random() - 0.5) * 0.3,
+                opacity: Math.random() * 0.5 + 0.2
+            });
+        }
     }
+    function animateBg() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = "#0a0f1c";
+        ctx.fillRect(0, 0, width, height);
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(100, 255, 218, ${p.opacity})`;
+            ctx.fill();
+            p.x += p.speedX;
+            p.y += p.speedY;
+            if (p.x < 0) p.x = width;
+            if (p.x > width) p.x = 0;
+            if (p.y < 0) p.y = height;
+            if (p.y > height) p.y = 0;
+        });
+        requestAnimationFrame(animateBg);
+    }
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles();
+    });
+    resizeCanvas();
+    initParticles();
+    animateBg();
 </script>
 </body>
 </html>
